@@ -1,0 +1,243 @@
+:root {
+  --primary: #0a2540;
+  --secondary: #01c3cd;
+  --accent: #00a4ef;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --success: #28a745;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background: linear-gradient(to right, var(--primary), var(--accent));
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.auth-container {
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  background-color: var(--light);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.auth-left, .auth-right {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-left {
+  flex: 1;
+  background-color: var(--primary);
+  color: var(--light);
+  text-align: center;
+}
+
+.auth-left .logo {
+  max-width: 250px;
+  height: auto;
+  margin: 0 auto 20px auto;
+  display: block;
+}
+
+.auth-left h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.auth-left p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.auth-right {
+  flex: 1;
+  background-color: var(--light);
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .auth-left, .auth-right {
+    padding: 20px;
+  }
+
+  .auth-left {
+    text-align: center;
+  }
+
+  .form-row.double {
+    flex-direction: column;
+  }
+}
+
+.toggle-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.toggle-box button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: var(--light);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.toggle-box button.active {
+  color: var(--secondary);
+  border-color: var(--secondary);
+}
+
+.form {
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form.active {
+  display: flex;
+}
+
+.form h2 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: var(--transition);
+}
+
+.form input:focus {
+  border-color: var(--secondary);
+  outline: none;
+}
+
+.forgot-password {
+  text-align: right;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.forgot-password a {
+  color: red;
+  text-decoration: none;
+  transition: var(--transition);
+  font-weight: 600;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.btn-auth {
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 10px rgba(1, 195, 205, 0.3);
+}
+
+.btn-auth:hover {
+  background-color: var(--accent);
+  box-shadow: 0 6px 15px rgba(0, 164, 239, 0.4);
+}
+
+.switch {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.switch span {
+  color: var(--secondary);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.switch span:hover {
+  text-decoration: underline;
+}
+
+/* --------- NEW STYLES FOR FORM ROWS --------- */
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form-row.double {
+  flex-direction: row;
+  gap: 10px;
+}
+
+.form-row.double input {
+  flex: 1;
+}
+
+/* --------- PASSWORD INFO ICON --------- */
+
+.password-row {
+  position: relative;
+}
+
+.info-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--secondary);
+}
+
+.info-icon:hover::after {
+  content: "Password must include: 1 uppercase, 1 lowercase, 1 number, 1 special character, and be at least 8 characters long.";
+  position: absolute;
+  top: 125%;
+  right: 0;
+  width: 260px;
+  background: var(--light);
+  color: var(--dark);
+  font-size: 0.85rem;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 10;
+}
