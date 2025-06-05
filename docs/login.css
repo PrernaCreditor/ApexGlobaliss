@@ -1,10 +1,12 @@
 :root {
-  --primary: #0a2540;
-  --secondary: #01c3cd;
-  --accent: #00a4ef;
+  --primary: #1a2b4c;        /* Deep navy blue from logo */
+  --secondary: #d4af37;      /* Rich gold from logo */
+  --accent: #b8860b;         /* Darker gold accent */
   --light: #f8f9fa;
   --dark: #212529;
   --success: #28a745;
+  --navy-dark: #0f1a2e;      /* Darker navy for depth */
+  --gold-light: #f4e4bc;     /* Light gold for backgrounds */
   --transition: all 0.3s ease;
 }
 
@@ -16,7 +18,7 @@
 }
 
 body {
-  background: linear-gradient(to right, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), var(--navy-dark), var(--accent));
   color: var(--dark);
   display: flex;
   align-items: center;
@@ -32,7 +34,8 @@ body {
   background-color: var(--light);
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 40px rgba(26, 43, 76, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .auth-left, .auth-right {
@@ -44,9 +47,21 @@ body {
 
 .auth-left {
   flex: 1;
-  background-color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--navy-dark));
   color: var(--light);
   text-align: center;
+  position: relative;
+}
+
+.auth-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.1) 50%, transparent 70%);
+  pointer-events: none;
 }
 
 .auth-left .logo {
@@ -54,16 +69,20 @@ body {
   height: auto;
   margin: 0 auto 20px auto;
   display: block;
+  filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
 }
 
 .auth-left h1 {
   font-size: 2rem;
   margin-bottom: 10px;
+  color: var(--secondary);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .auth-left p {
   font-size: 1rem;
   line-height: 1.5;
+  opacity: 0.9;
 }
 
 .auth-right {
@@ -93,24 +112,32 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  background-color: var(--gold-light);
+  border-radius: 8px;
+  padding: 4px;
 }
 
 .toggle-box button {
   flex: 1;
-  padding: 10px;
+  padding: 12px;
   border: none;
-  background-color: var(--light);
+  background-color: transparent;
   color: var(--primary);
   font-weight: 600;
   font-size: 1rem;
-  border-bottom: 3px solid transparent;
+  border-radius: 6px;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .toggle-box button.active {
-  color: var(--secondary);
-  border-color: var(--secondary);
+  background-color: var(--secondary);
+  color: var(--primary);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.toggle-box button:hover:not(.active) {
+  background-color: rgba(212, 175, 55, 0.2);
 }
 
 .form {
@@ -127,18 +154,25 @@ body {
   color: var(--primary);
   text-align: center;
   margin-bottom: 10px;
+  font-size: 1.8rem;
 }
 
 .form input {
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 2px solid #e0e0e0;
   transition: var(--transition);
+  font-size: 1rem;
 }
 
 .form input:focus {
   border-color: var(--secondary);
   outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.form input:hover {
+  border-color: var(--accent);
 }
 
 .forgot-password {
@@ -149,36 +183,46 @@ body {
 }
 
 .forgot-password a {
-  color: red;
+  color: var(--accent);
   text-decoration: none;
   transition: var(--transition);
   font-weight: 600;
 }
 
 .forgot-password a:hover {
+  color: var(--secondary);
   text-decoration: underline;
 }
 
 .btn-auth {
-  background-color: var(--secondary);
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
   color: var(--primary);
-  padding: 12px;
+  padding: 14px;
   border: none;
   border-radius: 8px;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: 0 4px 10px rgba(1, 195, 205, 0.3);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-auth:hover {
-  background-color: var(--accent);
-  box-shadow: 0 6px 15px rgba(0, 164, 239, 0.4);
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-auth:active {
+  transform: translateY(0);
 }
 
 .switch {
   text-align: center;
   font-size: 0.9rem;
+  margin-top: 10px;
 }
 
 .switch span {
@@ -189,6 +233,7 @@ body {
 }
 
 .switch span:hover {
+  color: var(--accent);
   text-decoration: underline;
 }
 
@@ -218,12 +263,21 @@ body {
 
 .info-icon {
   position: absolute;
-  right: 10px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 1.1rem;
   color: var(--secondary);
+  background: var(--light);
+  padding: 2px;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.info-icon:hover {
+  color: var(--accent);
+  background: var(--gold-light);
 }
 
 .info-icon:hover::after {
@@ -235,9 +289,72 @@ body {
   background: var(--light);
   color: var(--dark);
   font-size: 0.85rem;
-  padding: 10px;
-  border: 1px solid #ccc;
+  padding: 12px;
+  border: 2px solid var(--secondary);
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 25px rgba(26, 43, 76, 0.15);
   z-index: 10;
+  line-height: 1.4;
+}
+
+/* --------- ADDITIONAL ENHANCEMENTS --------- */
+
+.form input::placeholder {
+  color: #999;
+  opacity: 0.8;
+}
+
+.form input:focus::placeholder {
+  opacity: 0.5;
+}
+
+/* Loading state for button */
+.btn-auth.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-auth.loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Success/Error states */
+.form input.success {
+  border-color: var(--success);
+  background-color: rgba(40, 167, 69, 0.05);
+}
+
+.form input.error {
+  border-color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+/* Subtle animation for form appearance */
+.form.active {
+  animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
