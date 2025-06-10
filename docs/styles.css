@@ -183,7 +183,7 @@ nav ul li a:hover:after {
     display: none;
     background: none;
     border: none;
-    color: white;
+    color: #1a2b4c;
     font-size: 1.5rem;
     cursor: pointer;
 }
