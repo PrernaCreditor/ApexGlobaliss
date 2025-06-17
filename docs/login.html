@@ -68,31 +68,83 @@
     </div>
   </div>
 
+<script>
+  const loginToggle = document.getElementById('loginToggle');
+  const signupToggle = document.getElementById('signupToggle');
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  const switchToSignup = document.getElementById('switchToSignup');
+  const switchToLogin = document.getElementById('switchToLogin');
 
-  <script>
-    const loginToggle = document.getElementById('loginToggle');
-    const signupToggle = document.getElementById('signupToggle');
-    const loginForm = document.getElementById('loginForm');
-    const signupForm = document.getElementById('signupForm');
-    const switchToSignup = document.getElementById('switchToSignup');
-    const switchToLogin = document.getElementById('switchToLogin');
+  loginToggle.addEventListener('click', () => {
+    loginForm.classList.add('active');
+    signupForm.classList.remove('active');
+    loginToggle.classList.add('active');
+    signupToggle.classList.remove('active');
+  });
 
-    loginToggle.addEventListener('click', () => {
-      loginForm.classList.add('active');
-      signupForm.classList.remove('active');
-      loginToggle.classList.add('active');
-      signupToggle.classList.remove('active');
-    });
+  signupToggle.addEventListener('click', () => {
+    signupForm.classList.add('active');
+    loginForm.classList.remove('active');
+    signupToggle.classList.add('active');
+    loginToggle.classList.remove('active');
+  });
 
-    signupToggle.addEventListener('click', () => {
-      signupForm.classList.add('active');
-      loginForm.classList.remove('active');
-      signupToggle.classList.add('active');
-      loginToggle.classList.remove('active');
-    });
+  switchToSignup.addEventListener('click', (e) => {
+    e.preventDefault();
+    signupToggle.click();
+  });
 
-    switchToSignup.addEventListener('click', () => signupToggle.click());
-    switchToLogin.addEventListener('click', () => loginToggle.click());
-  </script>
+  switchToLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginToggle.click();
+  });
+
+  // Handle Signup
+  function handleSignup(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value.trim();
+
+    if (!email || !password) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (localStorage.getItem(email)) {
+      alert("User already exists. Please log in.");
+      loginToggle.click();
+      return;
+    }
+
+    localStorage.setItem(email, password);
+    alert("Signup successful! You can now log in.");
+    loginToggle.click();
+  }
+
+  // Handle Login
+  function handleLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    const storedPassword = localStorage.getItem(email);
+
+    if (!storedPassword) {
+      alert("Account not found. Please sign up.");
+      signupToggle.click();
+      return;
+    }
+
+    if (password === storedPassword) {
+      alert("Login successful!");
+      window.location.href = "dashboard.html";
+    } else {
+      alert("Incorrect password.");
+    }
+  }
+</script>
+
 </body>
 </html>
