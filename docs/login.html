@@ -1,3 +1,4 @@
+<!-- Save as login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,139 +13,145 @@
     <div class="auth-left">
         <img src="assets/logo_AG.png" alt="Company Logo" class="logo" />
         <h1>Redefining Business Excellence</h1>
-        <p>We empower organizations to transcend current limitations through groundbreaking strategies and transformative insights, ensuring sustained innovation and unparalleled market dominance.</p>
+        <p>We empower organizations to transcend current limitations through groundbreaking strategies and transformative insights.</p>
     </div>
+
     <div class="auth-right">
         <div class="toggle-box">
-        <button id="loginToggle" class="active">Login</button>
-        <button id="signupToggle">Signup</button>
+            <button id="loginToggle" class="active">Login</button>
+            <button id="signupToggle">Signup</button>
         </div>
-        <form id="loginForm" class="form active">
-        <h2>Welcome Back </h2>
-        <input type="email" placeholder="Email" required />
-        <input type="password" placeholder="Password" required />
-        
-        <p class="forgot-password"><a href="#">Forgot Password?</a></p>
-        
-        <button class="btn-auth">Login</button>
-        
-        <p class="switch">Don't have an account? <span id="switchToSignup">Signup</span></p>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="form active" onsubmit="handleLogin(event)">
+            <h2>Welcome Back</h2>
+            <input type="email" id="loginEmail" placeholder="Email" required />
+            <input type="password" id="loginPassword" placeholder="Password" required />
+            <p class="forgot-password"><a href="#">Forgot Password?</a></p>
+            <button class="btn-auth">Login</button>
+            <p class="switch">Don't have an account? <span id="switchToSignup">Signup</span></p>
         </form>
 
-
-        <form id="signupForm" class="form">
-        <h2>Create Account</h2>
-
-        <div class="form-row double">
-            <input type="text" placeholder="First Name" required />
-            <input type="text" placeholder="Last Name" required />
-        </div>
-
-        <div class="form-row">
-            <input type="email" placeholder="Email ID" required />
-        </div>
-
-        <div class="form-row">
-            <input type="tel" placeholder="Contact Number" required />
-        </div>
-
-        <div class="form-row">
-            <input type="date" placeholder="Date of Birth" required />
-        </div>
-
-        <div class="form-row password-row">
-            <input type="password" placeholder="Password" required id="password" />
-            <span class="info-icon" title="Password must include: 1 uppercase, 1 lowercase, 1 number, 1 special character, and be at least 8 characters long.">ℹ️</span>
-        </div>
-
-        <div class="form-row">
-            <input type="password" placeholder="Confirm Password" required />
-        </div>
-
-        <button class="btn-auth">Signup</button>
-        <p class="switch">Already have an account? <span id="switchToLogin">Login</span></p>
+        <!-- Signup Form -->
+        <form id="signupForm" class="form" onsubmit="handleSignup(event)">
+            <h2>Create Account</h2>
+            <div class="form-row double">
+                <input type="text" id="firstName" placeholder="First Name" required />
+                <input type="text" id="lastName" placeholder="Last Name" required />
+            </div>
+            <div class="form-row">
+                <input type="email" id="signupEmail" placeholder="Email ID" required />
+            </div>
+            <div class="form-row">
+                <input type="tel" id="contactNumber" placeholder="Contact Number" required />
+            </div>
+            <div class="form-row">
+                <input type="date" id="dob" placeholder="Date of Birth" required />
+            </div>
+            <div class="form-row password-row">
+                <input type="password" id="signupPassword" placeholder="Password" required />
+                <span class="info-icon" title="At least 8 characters, including uppercase, lowercase, number, and symbol.">ℹ️</span>
+            </div>
+            <div class="form-row">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+            </div>
+            <button class="btn-auth">Signup</button>
+            <p class="switch">Already have an account? <span id="switchToLogin">Login</span></p>
         </form>
-
     </div>
   </div>
 
-<script>
-  const loginToggle = document.getElementById('loginToggle');
-  const signupToggle = document.getElementById('signupToggle');
-  const loginForm = document.getElementById('loginForm');
-  const signupForm = document.getElementById('signupForm');
-  const switchToSignup = document.getElementById('switchToSignup');
-  const switchToLogin = document.getElementById('switchToLogin');
+  <script>
+    const loginToggle = document.getElementById('loginToggle');
+    const signupToggle = document.getElementById('signupToggle');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const switchToSignup = document.getElementById('switchToSignup');
+    const switchToLogin = document.getElementById('switchToLogin');
 
-  loginToggle.addEventListener('click', () => {
-    loginForm.classList.add('active');
-    signupForm.classList.remove('active');
-    loginToggle.classList.add('active');
-    signupToggle.classList.remove('active');
-  });
+    loginToggle.addEventListener('click', () => {
+      loginForm.classList.add('active');
+      signupForm.classList.remove('active');
+      loginToggle.classList.add('active');
+      signupToggle.classList.remove('active');
+    });
 
-  signupToggle.addEventListener('click', () => {
-    signupForm.classList.add('active');
-    loginForm.classList.remove('active');
-    signupToggle.classList.add('active');
-    loginToggle.classList.remove('active');
-  });
+    signupToggle.addEventListener('click', () => {
+      signupForm.classList.add('active');
+      loginForm.classList.remove('active');
+      signupToggle.classList.add('active');
+      loginToggle.classList.remove('active');
+    });
 
-  switchToSignup.addEventListener('click', (e) => {
-    e.preventDefault();
-    signupToggle.click();
-  });
-
-  switchToLogin.addEventListener('click', (e) => {
-    e.preventDefault();
-    loginToggle.click();
-  });
-
-  // Handle Signup
-  function handleSignup(event) {
-    event.preventDefault();
-
-    const email = document.getElementById("signupEmail").value.trim();
-    const password = document.getElementById("signupPassword").value.trim();
-
-    if (!email || !password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    if (localStorage.getItem(email)) {
-      alert("User already exists. Please log in.");
-      loginToggle.click();
-      return;
-    }
-
-    localStorage.setItem(email, password);
-    alert("Signup successful! You can now log in.");
-    loginToggle.click();
-  }
-
-  // Handle Login
-  function handleLogin(event) {
-    event.preventDefault();
-
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
-    const storedPassword = localStorage.getItem(email);
-
-    if (!storedPassword) {
-      alert("Account not found. Please sign up.");
+    switchToSignup.addEventListener('click', (e) => {
+      e.preventDefault();
       signupToggle.click();
-      return;
+    });
+
+    switchToLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginToggle.click();
+    });
+
+    async function handleSignup(event) {
+      event.preventDefault();
+
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const email = document.getElementById("signupEmail").value.trim();
+      const contactNumber = document.getElementById("contactNumber").value.trim();
+      const dob = document.getElementById("dob").value;
+      const password = document.getElementById("signupPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://localhost:8000/api/auth/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ firstName, lastName, email, contactNumber, dob, password })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "Signup failed");
+
+        alert("Signup successful! Please log in.");
+        loginToggle.click();
+      } catch (error) {
+        alert("Signup Error: " + error.message);
+      }
     }
 
-    if (password === storedPassword) {
-      alert("Login successful!");
-      window.location.href = "dashboard.html";
-    } else {
-      alert("Incorrect password.");
-    }
-  }
-</script>
+    async function handleLogin(event) {
+      event.preventDefault();
 
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value;
+
+      try {
+        const response = await fetch("http://localhost:8000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "Login failed");
+
+        // Save token and user data
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        alert("Login successful!");
+        window.location.href = "UserDashboard.html";
+      } catch (error) {
+        alert("Login Error: " + error.message);
+      }
+    }
+  </script>
 </body>
 </html>
