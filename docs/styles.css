@@ -574,7 +574,7 @@ nav ul li a:hover:after {
 
 /* Contact Section Styles */
 .contact {
-    padding: 80px 0;
+    padding: 20px 0;
     background: linear-gradient(rgba(26, 43, 76, 0.9), rgba(15, 26, 46, 0.9)),url('assets/contctt.avif');
     background-size: cover;
     background-position: center;
